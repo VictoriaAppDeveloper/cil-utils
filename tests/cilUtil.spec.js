@@ -568,9 +568,11 @@ describe('CilUtils', () => {
       sinon.stub(didUtils._kpFunds, 'address').value(ownAddress)
       didUtils.queryApi = sinon.fake.resolves(fakeUtxos);
 
-      const tx = await didUtils.performDIDOperation(
-        'addProvider',
-        ['tw'],
+      const tx = await didUtils.createTxWithContract(
+        {
+          method: 'addProvider',
+          arrArguments: ['tw']
+        },
         '44abd42dcd3d3def73dbf9aac211d9a966e653b4',
         200000,
         20000,
@@ -603,9 +605,11 @@ describe('CilUtils', () => {
       sinon.stub(didUtils._kpFunds, 'address').value(ownAddress)
       didUtils.queryApi = sinon.fake.resolves(fakeUtxos);
 
-      const tx = await didUtils.performDIDOperation(
-        'create',
-        ['tw', 'trueshura', '9dd718fff5671d6cff6be4b15fde1ea286528ea0'],
+      const tx = await didUtils.createTxWithContract(
+        {
+          method: 'create',
+          arrArguments: ['tw', 'trueshura', '9dd718fff5671d6cff6be4b15fde1ea286528ea0']
+        },
         '44abd42dcd3d3def73dbf9aac211d9a966e653b4',
         200000,
         20000,
