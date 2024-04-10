@@ -308,18 +308,18 @@ describe('CilUtils', () => {
     it('should properly calc change', async () => {
       const amount = 4000;
       const arrUtxos = [
-          {
-            "hash": "13252b7f61784f4d45740c38b4bbf15629e066b198c70b54a05af6f006b5b6c2",
-            "nOut": 1054,
-            "amount": amount,
-            "isStable": true
-          },
-          {
-            "hash": "21e8bdbee170964d36fcabe4e071bc14933551b9c2b031770ce73ba973bc4dd7",
-            "nOut": 20,
-            "amount": amount,
-            "isStable": true
-          }];
+        {
+          "hash": "13252b7f61784f4d45740c38b4bbf15629e066b198c70b54a05af6f006b5b6c2",
+          "nOut": 1054,
+          "amount": amount,
+          "isStable": true
+        },
+        {
+          "hash": "21e8bdbee170964d36fcabe4e071bc14933551b9c2b031770ce73ba973bc4dd7",
+          "nOut": 20,
+          "amount": amount,
+          "isStable": true
+        }];
 
       utils.getUtxos=sinon.fake.resolves(arrUtxos);
 
@@ -580,7 +580,7 @@ describe('CilUtils', () => {
       );
 
       assert.isOk(tx);
-      assert.match(tx.conciliumId, /^0|1$/);
+      assert.equal(tx.conciliumId, 1);
       assert.equal(tx.outputs[0].amount, 20000);
       assert.equal(tx.inputs.length, 1);
       assert.oneOf(tx.inputs[0].txHash.toString('hex'), fakeUtxos.map(({ hash }) => hash));
@@ -621,7 +621,7 @@ describe('CilUtils', () => {
       assert.isOk(tx);
       assert.equal(tx.inputs.length, 1);
       assert.equal(tx.outputs[0].amount, 20000);
-      assert.match(tx.conciliumId, /^0|1$/);
+      assert.equal(tx.conciliumId, 1);
       assert.oneOf(tx.inputs[0].txHash.toString('hex'), fakeUtxos.map(({ hash }) => hash));
       assert.equal(tx.outputs.length, 2);
       assert.match(tx.outputs[0].contractCode, /create.*tw.*trueshura.*8ea0/); // contract calling
